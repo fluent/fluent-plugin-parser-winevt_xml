@@ -1,5 +1,7 @@
 # fluent-plugin-parser-winevt_xml
 
+[![Build status](https://ci.appveyor.com/api/projects/status/eb0capv0q70u381f/branch/master?svg=true)](https://ci.appveyor.com/project/fluent/fluent-plugin-parser-winevt-xml/branch/master)
+
 ## Component
 
 ### Fluentd Parser plugin for XML rendered Windows EventLogs
