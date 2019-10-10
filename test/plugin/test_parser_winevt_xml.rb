@@ -33,7 +33,7 @@ class WinevtXMLparserTest < Test::Unit::TestCase
                 "Computer"          => "Fluentd-Developing-Windows",
                 "UserID"            => nil,
                 "Version"           => "2",
-                "EventData"         => []}
+                "InsertStrings"     => []}
     d.instance.parse(xml) do |time, record|
       assert_equal(expected, record)
     end
