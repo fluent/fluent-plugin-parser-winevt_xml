@@ -5,6 +5,10 @@ module Fluent::Plugin
   class WinevtXMLparser < Parser
     Fluent::Plugin.register_parser('winevt_xml', self)
 
+    def winevt_xml?
+      true
+    end
+
     def parse(text)
       record = {}
       doc = Nokogiri::XML(text)
@@ -26,7 +30,6 @@ module Fluent::Plugin
       record["Computer"]              = (system_elem/"Computer").text rescue nil
       record["UserID"]                = (system_elem/'Security').attribute("UserID").text rescue nil
       record["Version"]               = (system_elem/'Version').text rescue nil
-      record["InsertStrings"]         = [] # These parameters are processed in winevt_c.
       time = @estimate_current_event ? Fluent::EventTime.now : nil
       yield time, record
     end
