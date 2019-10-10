@@ -15,6 +15,7 @@ require 'fluent/test'
 
 require 'fluent/test/driver/parser'
 require 'fluent/plugin/parser_winevt_xml'
+require 'fluent/plugin/parser_winevt_sax'
 
 class Test::Unit::TestCase
 end
