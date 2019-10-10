@@ -26,6 +26,7 @@ module Fluent::Plugin
       record["ActivityID"]            = (system_elem/'Correlation').attribute('ActivityID').text rescue nil
       record["RelatedActivityID"]     = (system_elem/'Correlation').attribute("RelatedActivityID").text rescue nil
       record["ThreadID"]              = (system_elem/'Execution').attribute("ThreadID").text rescue nil
+      record["ProcessID"]             = (system_elem/'Execution').attribute("ProcessID").text rescue nil
       record["Channel"]               = (system_elem/'Channel').text rescue nil
       record["Computer"]              = (system_elem/"Computer").text rescue nil
       record["UserID"]                = (system_elem/'Security').attribute("UserID").text rescue nil

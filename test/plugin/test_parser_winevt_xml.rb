@@ -28,6 +28,7 @@ class WinevtXMLparserTest < Test::Unit::TestCase
                 "EventRecordID"     => "80688",
                 "ActivityID"        => "{587F0743-1F71-0006-5007-7F58711FD501}",
                 "RelatedActivityID" => nil,
+                "ProcessID"         => "912",
                 "ThreadID"          => "24708",
                 "Channel"           => "Security",
                 "Computer"          => "Fluentd-Developing-Windows",
