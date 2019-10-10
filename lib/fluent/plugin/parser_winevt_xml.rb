@@ -23,8 +23,8 @@ module Fluent::Plugin
       record["Keywords"]              = (system_elem/'Keywords').text rescue nil
       record["TimeCreated"]           = (system_elem/'TimeCreated').attribute("SystemTime").text rescue nil
       record["EventRecordID"]         = (system_elem/'EventRecordID').text rescue nil
-      record["ActivityID"]            = (system_elem/'ActivityID').text rescue nil
-      record["RelatedActivityID"]     = (system_elem/'Correlation').attribute("ActivityID").text rescue nil
+      record["ActivityID"]            = (system_elem/'Correlation').attribute('ActivityID').text rescue nil
+      record["RelatedActivityID"]     = (system_elem/'Correlation').attribute("RelatedActivityID").text rescue nil
       record["ThreadID"]              = (system_elem/'Execution').attribute("ThreadID").text rescue nil
       record["Channel"]               = (system_elem/'Channel').text rescue nil
       record["Computer"]              = (system_elem/"Computer").text rescue nil

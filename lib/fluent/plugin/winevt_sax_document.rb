@@ -23,7 +23,8 @@ class WinevtXMLDocument < Nokogiri::XML::SAX::Document
     elsif name == "TimeCreated"
       @result["TimeCreated"] = attributes[0][1] rescue nil
     elsif name == "Correlation"
-      @result["RelatedActivityID"] = attributes[0][1] rescue nil
+      @result["ActivityID"] = attributes[0][1] rescue nil
+      @result["RelatedActivityID"] = attributes[1][1] rescue nil
     elsif name == "Execution"
       @result["ProcessID"] = attributes[0][1] rescue nil
       @result["ThreadID"] = attributes[1][1] rescue nil
