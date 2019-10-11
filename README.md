@@ -17,9 +17,21 @@ gem install fluent-plugin-parser-winevt_xml
 
 ## Configuration
 
+### parser_winevt_xml
+
 ```aconf
 <parse>
   @type winevt_xml
+</parse>
+```
+
+### parser_winevt_sax
+
+This plugin is a bit faster than `winevt_xml`.
+
+```aconf
+<parse>
+  @type winevt_sax
 </parse>
 ```
 
