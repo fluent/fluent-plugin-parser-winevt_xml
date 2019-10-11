@@ -1,6 +1,6 @@
 require 'helper'
 
-class WinevtXMLparserTest < Test::Unit::TestCase
+class WinevtSAXparserTest < Test::Unit::TestCase
 
   def setup
     Fluent::Test.setup
@@ -10,13 +10,13 @@ class WinevtXMLparserTest < Test::Unit::TestCase
   XMLLOG = File.open(File.join(__dir__, "..", "data", "eventlog.xml") )
 
   def create_driver(conf = CONFIG)
-    Fluent::Test::Driver::Parser.new(Fluent::Plugin::WinevtXMLparser).configure(conf)
+    Fluent::Test::Driver::Parser.new(Fluent::Plugin::WinevtSAXparser).configure(conf)
   end
 
   def test_parse
     d = create_driver
     xml = XMLLOG
-    expected = {"ProviderName"      => "Microsoft-Windows-Security-Auditing",
+    expected = {"PrividerName"      => "Microsoft-Windows-Security-Auditing",
                 "ProviderGUID"      => "{54849625-5478-4994-A5BA-3E3B0328C30D}",
                 "EventID"           => "4624",
                 "Qualifiers"        => nil,
