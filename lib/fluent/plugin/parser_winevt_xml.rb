@@ -5,8 +5,31 @@ module Fluent::Plugin
   class WinevtXMLparser < Parser
     Fluent::Plugin.register_parser('winevt_xml', self)
 
+    config_param :preserve_qualifiers, :bool, default: true
+
     def winevt_xml?
       true
+    end
+
+    def preserve_qualifiers?
+      @preserve_qualifiers
+    end
+
+    def MAKELONG(low, high)
+      ((low & 0xffff) | (high & 0xffff)) << 16
+    end
+
+    def event_id(system_elem)
+      return (system_elem/'EventID').text rescue nil if @preserve_qualifiers
+
+      qualifiers = (system_elem/'EventID').attribute("Qualifiers").text rescue nil
+      if qualifiers
+        event_id = (system_elem/'EventID').text
+        event_id = MAKELONG(qualifiers.to_i, event_id.to_i)
+        event_id.to_s
+      else
+        (system_elem/'EventID').text rescue nil
+      end
     end
 
     def parse(text)
@@ -15,8 +38,10 @@ module Fluent::Plugin
       system_elem                     = doc/'Event'/'System'
       record["ProviderName"]          = (system_elem/"Provider").attribute("Name").text rescue nil
       record["ProviderGUID"]          = (system_elem/"Provider").attribute("Guid").text rescue nil
-      record["EventID"]               = (system_elem/'EventID').text rescue nil
-      record["Qualifiers"]            = (system_elem/'EventID').attribute("Qualifiers").text rescue nil
+      if @preserve_qualifiers
+        record["Qualifiers"]            = (system_elem/'EventID').attribute("Qualifiers").text rescue nil
+      end
+      record["EventID"]               = event_id(system_elem)
       record["Level"]                 = (system_elem/'Level').text rescue nil
       record["Task"]                  = (system_elem/'Task').text rescue nil
       record["Opcode"]                = (system_elem/'Opcode').text rescue nil
