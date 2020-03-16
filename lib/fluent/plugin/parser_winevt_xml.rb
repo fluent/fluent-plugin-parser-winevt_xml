@@ -16,7 +16,7 @@ module Fluent::Plugin
     end
 
     def MAKELONG(low, high)
-      ((low & 0xffff) | (high & 0xffff)) << 16
+      (low & 0xffff) | (high & 0xffff) << 16
     end
 
     def event_id(system_elem)
@@ -25,7 +25,7 @@ module Fluent::Plugin
       qualifiers = (system_elem/'EventID').attribute("Qualifiers").text rescue nil
       if qualifiers
         event_id = (system_elem/'EventID').text
-        event_id = MAKELONG(qualifiers.to_i, event_id.to_i)
+        event_id = MAKELONG(event_id.to_i, qualifiers.to_i)
         event_id.to_s
       else
         (system_elem/'EventID').text rescue nil

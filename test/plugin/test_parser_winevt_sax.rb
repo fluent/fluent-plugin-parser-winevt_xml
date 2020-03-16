@@ -55,7 +55,7 @@ class WinevtSAXparserTest < Test::Unit::TestCase
       expected = {"ActivityID"        => nil,
                   "Channel"           => "Application",
                   "Computer"          => "DESKTOP-G457RDR",
-                  "EventID"           => "3221880832",
+                  "EventID"           => "3221241866",
                   "EventRecordID"     => "150731",
                   "Keywords"          => "0x80000000000000",
                   "Level"             => "4",

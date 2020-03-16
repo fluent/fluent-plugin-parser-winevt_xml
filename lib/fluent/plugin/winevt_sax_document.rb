@@ -9,14 +9,14 @@ class WinevtXMLDocument < Nokogiri::XML::SAX::Document
   end
 
   def MAKELONG(low, high)
-    ((low & 0xffff) | (high & 0xffff)) << 16
+    (low & 0xffff) | (high & 0xffff) << 16
   end
 
   def event_id
     if @result.has_key?("Qualifiers")
       qualifiers = @result.delete("Qualifiers")
       event_id = @result['EventID']
-      event_id = MAKELONG(qualifiers.to_i, event_id.to_i)
+      event_id = MAKELONG(event_id.to_i, qualifiers.to_i)
       @result['EventID'] = event_id.to_s
     else
       @result['EventID']
