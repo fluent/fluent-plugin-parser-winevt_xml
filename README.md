@@ -22,8 +22,13 @@ gem install fluent-plugin-parser-winevt_xml
 ```aconf
 <parse>
   @type winevt_xml
+  preserve_qualifiers true
 </parse>
 ```
+
+#### preserve_qualifiers
+
+Preserve Qualifiers key instead of calculating actual EventID with Qualifiers. Default is `true`.
 
 ### parser_winevt_sax
 
@@ -32,8 +37,13 @@ This plugin is a bit faster than `winevt_xml`.
 ```aconf
 <parse>
   @type winevt_sax
+  preserve_qualifiers true
 </parse>
 ```
+
+#### preserve_qualifiers
+
+Preserve Qualifiers key instead of calculating actual EventID with Qualifiers. Default is `true`.
 
 ## Copyright
 

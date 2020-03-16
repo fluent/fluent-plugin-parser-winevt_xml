@@ -1,12 +1,35 @@
 require 'nokogiri'
 
 class WinevtXMLDocument < Nokogiri::XML::SAX::Document
-  attr_reader :result
-
-  def initialize
+  def initialize(preserve_qualifiers)
     @stack = []
     @result = {}
-    super
+    @preserve_qualifiers = preserve_qualifiers
+    super()
+  end
+
+  def MAKELONG(low, high)
+    (low & 0xffff) | (high & 0xffff) << 16
+  end
+
+  def event_id
+    if @result.has_key?("Qualifiers")
+      qualifiers = @result.delete("Qualifiers")
+      event_id = @result['EventID']
+      event_id = MAKELONG(event_id.to_i, qualifiers.to_i)
+      @result['EventID'] = event_id.to_s
+    else
+      @result['EventID']
+    end
+  end
+
+  def result
+    return @result if @preserve_qualifiers
+
+    if @result
+      @result['EventID'] = event_id
+    end
+    @result
   end
 
   def start_document
@@ -16,7 +39,7 @@ class WinevtXMLDocument < Nokogiri::XML::SAX::Document
     @stack << name
 
     if name == "Provider"
-      @result["PrividerName"] = attributes[0][1] rescue nil
+      @result["ProviderName"] = attributes[0][1] rescue nil
       @result["ProviderGUID"] = attributes[1][1] rescue nil
     elsif name == "EventID"
       @result["Qualifiers"] = attributes[0][1] rescue nil

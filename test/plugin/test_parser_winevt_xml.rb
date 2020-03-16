@@ -1,4 +1,4 @@
-require 'helper'
+require_relative '../helper'
 
 class WinevtXMLparserTest < Test::Unit::TestCase
 
@@ -7,7 +7,7 @@ class WinevtXMLparserTest < Test::Unit::TestCase
   end
 
   CONFIG = %[]
-  XMLLOG = File.open(File.join(__dir__, "..", "data", "eventlog.xml") )
+  XMLLOG = File.open(File.join(__dir__, "..", "data", "eventlog.xml"))
 
   def create_driver(conf = CONFIG)
     Fluent::Test::Driver::Parser.new(Fluent::Plugin::WinevtXMLparser).configure(conf)
@@ -37,7 +37,44 @@ class WinevtXMLparserTest < Test::Unit::TestCase
     d.instance.parse(xml) do |time, record|
       assert_equal(expected, record)
     end
+    xml.close
 
     assert_true(d.instance.winevt_xml?)
+  end
+
+  class QualifiersTest < self
+    def setup
+      @xml = File.open(File.join(__dir__, "..", "data", "eventlog-with-qualifiers.xml"))
+    end
+
+    def teardown
+      @xml.close
+    end
+
+    def test_without_qualifiers
+      d = create_driver CONFIG + %[preserve_qualifiers false]
+      expected = {"ActivityID"        => nil,
+                  "Channel"           => "Application",
+                  "Computer"          => "DESKTOP-G457RDR",
+                  "EventID"           => "3221241866",
+                  "EventRecordID"     => "150731",
+                  "Keywords"          => "0x80000000000000",
+                  "Level"             => "4",
+                  "Opcode"            => "0",
+                  "ProcessID"         => "0",
+                  "ProviderGUID"      => "{E23B33B0-C8C9-472C-A5F9-F2BDFEA0F156}",
+                  "ProviderName"      => "Microsoft-Windows-Security-SPP",
+                  "RelatedActivityID" => nil,
+                  "Task"              => "0",
+                  "ThreadID"          => "0",
+                  "TimeCreated"       => "2020-01-16T09:57:18.013693700Z",
+                  "UserID"            => nil,
+                  "Version"           => "0"}
+      d.instance.parse(@xml) do |time, record|
+        assert_equal(expected, record)
+      end
+
+      assert_true(d.instance.winevt_xml?)
+    end
   end
 end
