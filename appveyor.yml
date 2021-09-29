@@ -1,4 +1,5 @@
 version: '{build}'
+image: Visual Studio 2019
 
 # init:
 #   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -20,5 +21,9 @@ branches:
 # https://www.appveyor.com/docs/installed-software/#ruby
 environment:
   matrix:
-    - ruby_version: "24-x64"
-    - ruby_version: "24"
+    - ruby_version: "30-x64"
+    - ruby_version: "30"
+    - ruby_version: "27-x64"
+    - ruby_version: "27"
+    - ruby_version: "26-x64"
+    - ruby_version: "26"
