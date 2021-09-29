@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "test-unit", "~> 3.2.0"
+  spec.add_development_dependency "test-unit", "~> 3.4.0"
   spec.add_runtime_dependency "fluentd", [">= 0.14.12", "< 2"]
   spec.add_runtime_dependency "nokogiri", [">= 1.11.pre", "< 1.12"]
 end
