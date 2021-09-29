@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-parser-winevt_xml"
-  spec.version       = "0.2.3.rc1"
+  spec.version       = "0.2.3"
   spec.authors       = ["Hiroshi Hatake", "Masahiro Nakagawa"]
   spec.email         = ["cosmo0920.oucc@gmail.com", "repeatedly@gmail.com"]
   spec.summary       = %q{Fluentd Parser plugin to parse XML rendered windows event log.}
@@ -21,5 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "test-unit", "~> 3.4.0"
   spec.add_runtime_dependency "fluentd", [">= 0.14.12", "< 2"]
-  spec.add_runtime_dependency "nokogiri", [">= 1.11.pre", "< 1.12"]
+  spec.add_runtime_dependency "nokogiri", [">= 1.12.5", "< 1.13"]
 end
