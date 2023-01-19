@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-parser-winevt_xml"
-  spec.version       = "0.2.4"
+  spec.version       = "0.2.5"
   spec.authors       = ["Hiroshi Hatake", "Masahiro Nakagawa"]
   spec.email         = ["cosmo0920.oucc@gmail.com", "repeatedly@gmail.com"]
   spec.summary       = %q{Fluentd Parser plugin to parse XML rendered windows event log.}
