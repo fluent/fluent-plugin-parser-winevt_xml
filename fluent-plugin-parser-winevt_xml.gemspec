@@ -22,4 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "test-unit", "~> 3.4.0"
   spec.add_runtime_dependency "fluentd", [">= 0.14.12", "< 2"]
   spec.add_runtime_dependency "nokogiri", [">= 1.12.5", "< 1.16"]
+
+  # gems that aren't default gems as of Ruby 3.4
+  spec.add_runtime_dependency "base64", "~> 0.2"
+  spec.add_runtime_dependency "csv", "~> 3.2"
 end
