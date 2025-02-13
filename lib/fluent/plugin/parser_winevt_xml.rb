@@ -20,7 +20,9 @@ module Fluent::Plugin
     end
 
     def event_id(system_elem)
-      return (system_elem/'EventID').text rescue nil if @preserve_qualifiers
+      if @preserve_qualifiers
+        return (system_elem/'EventID').text rescue nil
+      end
 
       qualifiers = (system_elem/'EventID').attribute("Qualifiers").text rescue nil
       if qualifiers
