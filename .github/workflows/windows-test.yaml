@@ -13,7 +13,7 @@ jobs:
     uses: ruby/actions/.github/workflows/ruby_versions.yml@master
     with:
       engine: cruby
-      min_version: 2.7
+      min_version: 3.2
   test:
     needs: ruby-versions
     runs-on: ${{ matrix.os }}
@@ -22,7 +22,7 @@ jobs:
       matrix:
         ruby: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
         exclude:
-          - ruby: head
+          - ruby: ${{ github.event_name != 'schedule' && 'head' || '__none__' }}
         os:
           - windows-latest
     name: Ruby ${{ matrix.ruby }} on ${{ matrix.os }}
