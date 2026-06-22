@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-class WinevtXMLDocument < Nokogiri::XML::SAX::Document
+class WinevtXMLDocumentNokogiri < Nokogiri::XML::SAX::Document
   def initialize(preserve_qualifiers)
     @stack = []
     @result = {}
@@ -66,6 +66,7 @@ class WinevtXMLDocument < Nokogiri::XML::SAX::Document
   end
 
   def end_element(name, attributes = [])
+    @stack.pop
   end
 
   def end_document
