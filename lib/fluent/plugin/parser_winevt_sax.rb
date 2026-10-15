@@ -19,7 +19,7 @@ module Fluent::Plugin
           require 'nokogiri'
           require 'fluent/plugin/winevt_sax_document_nokogiri'
           @use_nokogiri = true
-        rescue
+        rescue LoadError => e
           if @parser == :nokogiri
             raise Fluent::ConfigError,
                   "Nokogiri is required when 'parser nokogiri' is specified, but it isn't installed. " \
